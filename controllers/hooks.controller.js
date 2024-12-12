@@ -33,6 +33,7 @@ const usersController = {
             res.status(200).send('Webhook received and script executed');
         });
     }
+    //Test auto hook
 
 }
 
