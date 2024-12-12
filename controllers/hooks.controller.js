@@ -7,6 +7,9 @@ const usersController = {
             .createHmac('sha256', GITHUB_SECRET)
             .update(JSON.stringify(req.body))
             .digest('hex')}`;
+
+        console.log("header git :", req.headers['x-hub-signature-256'])
+        console.log("signature :", signature)
         
         const isValid = req.headers['x-hub-signature-256'] === signature;
         
