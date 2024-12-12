@@ -1,4 +1,4 @@
-
+const crypto = require("crypto");
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 
 const usersController = {
@@ -9,7 +9,7 @@ const usersController = {
             .digest('hex')}`;
         
         const isValid = req.headers['x-hub-signature-256'] === signature;
-
+        
         if (!isValid) {
             console.log('Unauthorized request')
             return res.status(401).send('Unauthorized request');
