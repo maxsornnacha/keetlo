@@ -19,7 +19,7 @@ const usersController = {
         //call shell script to work
         console.log('Webhook verified.');
         //Do Executing the shell script
-        exec('sh ../shell/deploy.sh', (error, stdout, stderr) => {
+        exec('sh /mnt/xvdd/keetlo/api/shell/deploy.sh', (error, stdout, stderr) => {
             if (error) {
                 console.error(`Error executing script: ${error.message}`);
                 return res.status(500).send('Script execution failed');
