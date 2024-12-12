@@ -20,7 +20,7 @@ const usersController = {
             return res.status(401).send('Unauthorized request');
         }
 
-        console.log('GitHub Webhook Received:', req.body.action);
+        console.log('GitHub Webhook Received:', req.body);
 
         res.status(200).send('Webhook received');
     }
