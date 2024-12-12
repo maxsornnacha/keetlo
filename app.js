@@ -9,11 +9,13 @@ configureMiddleware(app);
 const imagesRouter = require("./routes/images.router");
 const usersRouter = require("./routes/users.router");
 const meetingsRouter = require("./routes/meeting.router");
+const hooksRouter = require("./routes/hooks.router");
 
 //use routers
 app.use("/api/images", imagesRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/meetings", meetingsRouter);
+app.use("/api/hooks", hooksRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
