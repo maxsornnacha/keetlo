@@ -7,7 +7,9 @@ const usersController = {
             .createHmac('sha256', GITHUB_SECRET)
             .update(JSON.stringify(req.body))
             .digest('hex')}`;
-
+        
+        console.log('GITHUB_SECRET:', GITHUB_SECRET);
+        console.log('Generated Signature:', signature);
         console.log("header git :", req.headers['x-hub-signature-256'])
         console.log("signature :", signature)
         
