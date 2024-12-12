@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 // Start the server
 const port = process.env.PORT || 3004;
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running in ${process.env.NODE_ENV} mode on port: ${port}`);
   console.log(`Access origin : [${process.env.CLIENT_URL}, ${process.env.CLIENT_URL_1}, ${process.env.CLIENT_URL_2}]`)
 });
 
