@@ -78,4 +78,4 @@ io.on('connection', (socket) => {
   });
 });
 
-module.exports = { httpServer, io };
+module.exports = { httpServer, io, app };
