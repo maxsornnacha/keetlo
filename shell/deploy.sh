@@ -23,4 +23,5 @@ echo "Deploy script completed on keetlo api"
 
 # RUN pm2 again
 pm2 restart keetlo-socket
+pm2 restart keetlo-client
 pm2 restart keetlo-api
