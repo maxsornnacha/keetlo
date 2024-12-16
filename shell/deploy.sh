@@ -15,7 +15,6 @@ npm install
 echo "Deploy script completed on keetlo socket"
 
 # CLIENT deploying
-s
 
 # RUN pm2 again
 pm2 restart keetlo-socket
