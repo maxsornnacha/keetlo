@@ -8,6 +8,11 @@ npm install
 echo "Deploy script completed on keetlo socket"
 
 # CLIENT deploying
+echo "Deploy script started on keetlo client"
+cd /mnt/xvdd/keetlo/client
+git pull origin main
+npm install
+echo "Deploy script completed on keetlo client"
 
 # API deploying
 echo "Deploy script started on keetlo api"
