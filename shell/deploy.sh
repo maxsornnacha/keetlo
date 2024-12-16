@@ -11,7 +11,6 @@ echo "Deploy script completed on keetlo socket"
 echo "Deploy script started on keetlo client"
 cd /mnt/xvdd/keetlo/client
 git pull origin main
-npm install
 echo "Deploy script completed on keetlo client"
 
 # API deploying
