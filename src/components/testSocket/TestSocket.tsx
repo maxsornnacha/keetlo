@@ -5,7 +5,7 @@ const socket = io(process.env.NEXT_PUBLIC_API_SOCKET_URL);
 
 export default function TestSocket() {
   const [inputValue, setInputValue] = useState<string>("");
-  const [messages, setMessages] = useState<string>("");
+  const [messages, setMessages] = useState<Array<string>>([]);
 
   const submit = async () => {
     if (!inputValue.trim()) {
@@ -18,7 +18,7 @@ export default function TestSocket() {
 
   useEffect(()=>{
     const handleSetMessage = ({message} : {message : string}) =>{
-        setMessages(message)
+        setMessages((prev)=>[...prev, message])
     }
     socket.on('message',handleSetMessage)
     return ()=>{
@@ -46,7 +46,14 @@ export default function TestSocket() {
 
       <br/>
       <div>
-         {messages}
+         {messages && messages.length > 0 &&
+         messages.map((message, index)=>(
+          <div key={index} className="py-4 border-b">
+            <p>ข้อความที่ : {index+1}</p>
+            {message}
+          </div>
+         ))
+         }
       </div>
     </div>
   );
