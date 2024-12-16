@@ -21,6 +21,11 @@ const rooms = {};
 io.on('connection', (socket) => {
 //   console.log(`User connected: ${socket.id}`);
 
+  socket.on('message', ({ message }) => {
+    console.log("message :", message)
+    io.emit('message', { message});
+  });
+
   // Join room event
   socket.on('join-room', ({ room_code }) => {
     if (!room_code) {
