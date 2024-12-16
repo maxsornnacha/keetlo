@@ -1,7 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
-const socket = io(process.env.NEXT_PUBLIC_API_SOCKET_URL);
+const socket = io(process.env.NEXT_PUBLIC_API_SOCKET_URL, {
+  transports: ['websocket'],
+  withCredentials: true, // This ensures credentials are sent
+});
 
 export default function TestSocket() {
   const [inputValue, setInputValue] = useState<string>("");
