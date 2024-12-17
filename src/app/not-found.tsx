@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, Typography, Container, Box } from "@mui/material";
+import { Typography, Container, Box } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,7 +37,7 @@ export default function NotFound() {
           404: Page Not Found
         </Typography>
         <Typography variant="h6" sx={{ marginBottom: "24px", color: "gray" }}>
-          Oops! It seems like you've wandered into uncharted territory.
+          Oops! It seems like you&apos;ve wandered into uncharted territory.
         </Typography>
         <Link href={"/"}>
         <button

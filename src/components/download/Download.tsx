@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { Button, Typography, Container, Grid, Card, CardContent, Box } from "@mui/material";
+import { Typography, Container, Grid, Card, CardContent, Box } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWindows,
@@ -154,7 +154,7 @@ export default function Download() {
             <Typography variant="h6" gutterBottom>Android</Typography>
             <ol className="list-decimal pl-5">
               <li className="mb-2">Open Google Play Store on your device.</li>
-              <li className="mb-2">Search for "Keetlo Meeting" and tap Install.</li>
+              <li className="mb-2">Search for &quot;Keetlo Meeting&quot; and tap Install.</li>
               <li className="mb-2">Open the app after installation.</li>
               <li>Sign in and start using Keetlo Meeting.</li>
             </ol>
@@ -163,8 +163,8 @@ export default function Download() {
             <Typography variant="h6" gutterBottom>iOS</Typography>
             <ol className="list-decimal pl-5">
               <li className="mb-2">Open the App Store on your iOS device.</li>
-              <li className="mb-2">Search for "Keetlo Meeting" and tap Get.</li>
-              <li className="mb-2">Open the app after it's installed.</li>
+              <li className="mb-2">Search for &quot;Keetlo Meeting&quot; and tap Get.</li>
+              <li className="mb-2">Open the app after it&quot;s installed.</li>
               <li>Sign in with your account to begin.</li>
             </ol>
           </Grid>

@@ -2,11 +2,8 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Snackbar, Alert, AlertColor } from "@mui/material";
 import NewMeeting from "./NewMeeting";
-import { useRouter } from "next/navigation";
 
 interface Slide {
   title: string;
@@ -15,11 +12,6 @@ interface Slide {
   image: string;
 }
 
-interface MeetingInfo {
-  meeting_room_id: number;
-  room_name: string;
-  room_code: string;
-}
 
 const slides: Slide[] = [
   {
@@ -43,7 +35,6 @@ const slides: Slide[] = [
 ];
 
 export default function Join() {
-  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
@@ -52,12 +43,6 @@ export default function Join() {
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
-    );
   };
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { TextField, IconButton, InputAdornment, Snackbar, Alert } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
+import { AxiosError } from 'axios';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ export default function SignUp() {
 
   const validateForm = () => {
     let isValid = true;
-    let tempErrors = { name: "", email: "", password: "", confirmPassword: "" };
+    const tempErrors = { name: "", email: "", password: "", confirmPassword: "" };
 
     // Name validation
     if (!formData.name.trim()) {
@@ -83,12 +84,22 @@ export default function SignUp() {
         });
         // Reset form
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-      } catch (error: any) {
-        setSnackbar({
-          open: true,
-          message: error.response?.data?.message || "Sign-Up Failed",
-          severity: "error",
-        });
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          // Now you can safely access AxiosError properties
+          setSnackbar({
+            open: true,
+            message: error.response?.data?.message || "Sign-Up Failed",
+            severity: "error",
+          });
+        } else {
+          // Handle the case where the error is not an AxiosError
+          setSnackbar({
+            open: true,
+            message: "An unknown error occurred.",
+            severity: "error",
+          });
+        }
       }
     }
   };

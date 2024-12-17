@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
 
-export default function Layout1({ children }: any){
+export default function Layout1({ children }: {children : React.ReactNode}){
     const pathname = usePathname();
     
     return (

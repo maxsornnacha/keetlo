@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { Button, Typography, Container, Grid, Card, CardContent, Box, TextField } from "@mui/material";
+import { Typography, Container, Grid, Card, CardContent, Box } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 // Import Swiper styles
@@ -257,7 +257,7 @@ export default function Home() {
                 What Our Users Say
               </Typography>
               <Typography variant="body1" style={{ textAlign: "center", color: "#6c757d" }}>
-                "Mama Meeting has transformed the way we collaborate remotely!"
+              &quot;Mama Meeting has transformed the way we collaborate remotely!&quot;
               </Typography>
             </Container>
           </div>

@@ -2,7 +2,7 @@
 import PrejoinMeetingRoom from "./PrejoinMeetingRoom";
 import MeetingRoom from "./MeetingRoom";
 import { useRef, useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { io } from "socket.io-client";
 import handlePeerConnection from "./handlePeerConnection";
 import Peer from "simple-peer";
@@ -69,7 +69,7 @@ export default function CheckStatusBeforeJoining({ room_code }: Props) {
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRefs = useRef<{ [key: string]: HTMLVideoElement }>({});
 
-  const handleSetAllDevicesBeforeConnecting = async ({data}: any) => {
+  const handleSetAllDevicesBeforeConnecting = async ({data}: {data: Devices}) => {
     setDevices(data);
     await handlePeerConnection(data, localVideoRef, remoteVideoRefs, socket, peers, setPeers, room_code);
   };
@@ -84,9 +84,26 @@ export default function CheckStatusBeforeJoining({ room_code }: Props) {
         }
       );
       setMeetingDetails(response.data);
-    } catch (err: any) {
-      console.log("Error fetching meeting details:", err);
-      setError(err.message || "Failed to load meeting details.");
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+        // AxiosError specific handling
+        if (err.response) {
+          console.log("Error fetching meeting details:", err.response.data);
+          setError(err.response.data?.message || "Failed to load meeting details.");
+        } else if (err.request) {
+          // No response was received
+          console.log("Error fetching meeting details: No response received", err.request);
+          setError("Failed to load meeting details due to no response from server.");
+        } else {
+          // Something happened while setting up the request
+          console.log("Error fetching meeting details:", err.message);
+          setError(err.message || "Failed to load meeting details.");
+        }
+      } else {
+        // Handle generic error
+        console.log("An unknown error occurred:", err);
+        setError("An unknown error occurred.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -121,7 +138,7 @@ export default function CheckStatusBeforeJoining({ room_code }: Props) {
         socket.emit("update-meeting-room", { room_code });
         router.push("/join");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.log("Error ending the call:", error);
     }
   };

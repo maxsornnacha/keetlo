@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, RefObject } from "react";
+import React, { useState, RefObject } from "react";
 import {
   AppBar,
   Toolbar,
@@ -30,21 +30,13 @@ import CallEndIcon from "@mui/icons-material/CallEnd";
 import ClosedCaptionIcon from "@mui/icons-material/ClosedCaption";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 
-
-const participants = [
-    { id: 1, name: 'You', avatar: 'https://cdn.pixabay.com/photo/2023/11/05/15/25/winter-8367632_1280.jpg', isSelf: true },
-    { id: 2, name: 'John Doe', avatar: 'https://cdn.pixabay.com/photo/2024/11/02/17/29/city-9169729_1280.jpg' },
-    { id: 3, name: 'Jane Smith', avatar: 'https://media.istockphoto.com/id/1455708318/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%A1%E0%B8%B8%E0%B8%A1%E0%B8%A1%E0%B8%AD%E0%B8%87%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%B8%E0%B8%A3%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B9%8C%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B8%9B%E0%B9%88%E0%B8%B2%E0%B8%8A%E0%B8%B2%E0%B8%A2%E0%B9%80%E0%B8%A5%E0%B8%99-sungei-buloh-%E0%B9%83%E0%B8%99%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%84%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%8C.jpg?s=2048x2048&w=is&k=20&c=CAwO-AmBh5kv3HAX88fUqB_Ce-QV0kEpy1ow_jypkSk=' },
-    { id: 4, name: 'Bob Johnson', avatar: 'https://cdn.pixabay.com/photo/2022/09/07/12/22/autumn-7438675_960_720.jpg' },
-];
-
 interface Devices {
-  isMicOn : Boolean;
-  isCameraOn: Boolean;
+  isMicOn : boolean;
+  isCameraOn: boolean;
   selectedMic: string;
   selectedSpeaker: string;
   selectedCamera: string;
-  status: Boolean;
+  status: boolean;
 }
 
 interface MeetingInfo {
@@ -80,8 +72,8 @@ interface Props {
   handleEndCall: () => void;
   localVideoRef: RefObject<HTMLVideoElement>;
   remoteVideoRefs: RefObject<{ [key: string]: HTMLVideoElement }>;
-  handleToggleCamera: any;
-  handleToggleMic: any;
+  handleToggleCamera: (parameter : boolean) => void;
+  handleToggleMic: (parameter : boolean) => void;
 }
 
 

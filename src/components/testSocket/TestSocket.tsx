@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 const socket = io(process.env.NEXT_PUBLIC_API_SOCKET_URL);
 
 export default function TestSocket() {

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import {
   Dialog,
@@ -19,6 +18,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import { AxiosError } from "axios";
 
 export default function NewMeeting() {
   const [open, setOpen] = useState(false);
@@ -30,8 +30,6 @@ export default function NewMeeting() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
-  const router = useRouter();
 
   const handleOpen = () => {
     setOpen(true);
@@ -93,8 +91,16 @@ export default function NewMeeting() {
         setSnackbarSeverity("error");
         setSnackbarOpen(true);
       }
-    } catch (error : any) {
-      setSnackbarMessage(error?.response?.data?.message || "An error occurred while creating the meeting.");
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred while creating the meeting.";
+      if (error instanceof AxiosError) {
+        // Check if response or data exists
+        errorMessage = error?.response?.data?.message || errorMessage;
+      } else if (error instanceof Error) {
+        // This handles non-AxiosError cases (generic JavaScript errors)
+        errorMessage = error.message;
+      }
+      setSnackbarMessage(errorMessage);
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
     }

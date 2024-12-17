@@ -11,6 +11,7 @@ import {
   Divider,
 } from "@mui/material";
 import axios from "axios";
+import { AxiosError } from "axios";
 
 interface Session {
   device: string;
@@ -30,8 +31,16 @@ export function LoggedInSessions() {
           withCredentials: true,
         });
         setSessions(response.data);
-      } catch (error : any) {
-        console.log("Error fetching sessions:", error);
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          // Now you have access to properties like `response`, `data`, etc.
+          console.log("Error fetching sessions (AxiosError):", error?.response?.data?.message);
+        } else if (error instanceof Error) {
+          // This handles any other general errors
+          console.log("Error fetching sessions (General Error):", error.message);
+        } else {
+          console.log("Unknown error occurred:", error);
+        }
       } finally {
         setLoading(false);
       }
@@ -43,7 +52,7 @@ export function LoggedInSessions() {
   return (
     <Card>
       <CardHeader
-        title={<Typography variant="h6">Where You're Logged In</Typography>}
+        title={<Typography variant="h6">Where You&apos;re Logged In</Typography>}
         subheader={
           <Typography variant="body2" color="textSecondary">
             Manage your active sessions

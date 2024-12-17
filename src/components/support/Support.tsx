@@ -104,7 +104,7 @@ export default function Support() {
       {/* Support Topics */}
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Typography variant="h4" fontWeight="bold" textAlign="center" mb={4}>
-          Need help? We've got your back.
+          Need help? We&apos;ve got your back.
         </Typography>
         <Grid container spacing={4}>
           {supportTopics.map((topic, index) => (

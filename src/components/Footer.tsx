@@ -34,7 +34,7 @@ export default function Footer(){
                     Blog
                   </Link>
                   <Link href="#" style={{ color: "white", display: "block", margin: "8px 0" }}>
-                    Careers <span style={{ fontWeight: "bold" }} className="text-red-500">WE'RE HIRING</span>
+                    Careers <span style={{ fontWeight: "bold" }} className="text-red-500">WE&apos;RE HIRING</span>
                   </Link>
                   <Link href="#" style={{ color: "white", display: "block", margin: "8px 0" }}>
                     Contact Us

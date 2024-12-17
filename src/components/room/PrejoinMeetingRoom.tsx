@@ -2,11 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import {
-  AppBar,
-  Toolbar,
   Typography,
-  Button,
-  IconButton,
   Tooltip,
   Avatar,
   FormControl,
@@ -21,26 +17,29 @@ import MicIcon from "@mui/icons-material/Mic";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import VideocamOffIcon from "@mui/icons-material/VideocamOff";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/hooks";
 import { fetchUserLoginStatus } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { AxiosError } from 'axios';
 
 const socket = io(process.env.NEXT_PUBLIC_API_SOCKET_URL);
 
+type DeviceSettings = {
+  isMicOn: boolean;
+  isCameraOn: boolean;
+  selectedMic: string;  // or the correct type if it's more specific (like an object or number)
+  selectedSpeaker: string;
+  selectedCamera: string;
+  status: boolean;
+};
+
 interface Props {
   room_code: string;
-  handleSetAllDevicesBeforeConnecting: any;
-}
-
-declare global {
-  interface Window {
-    __REACT_ERROR__?: any; // Replace `any` with the specific type if known
-  }
+  handleSetAllDevicesBeforeConnecting: (data: { data: DeviceSettings }) => Promise<void>;
 }
 
 export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBeforeConnecting }: Props) {
@@ -77,19 +76,24 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
       console.log("Permissions granted");
-    } catch (error : any) {
-      console.log("Permission denied:", error);
-      if (error.name === "NotReadableError") {
-        setError("The camera is in use by another application. Please close the other application and try again.");
-      } else if (error.name === "NotAllowedError") {
-        setError("Camera access was denied. Please enable camera permissions in your browser settings.");
-      } else if (error.name === "OverconstrainedError") {
-        setError("The camera is not available or doesn't meet the required constraints.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log("Permission denied:", error);
+    
+        if (error.name === "NotReadableError") {
+          setError("The camera is in use by another application. Please close the other application and try again.");
+        } else if (error.name === "NotAllowedError") {
+          setError("Camera access was denied. Please enable camera permissions in your browser settings.");
+        } else if (error.name === "OverconstrainedError") {
+          setError("The camera is not available or doesn't meet the required constraints.");
+        } else {
+          setError("An unexpected error occurred while accessing the camera. Please try again.");
+        }
       } else {
-        setError("An unexpected error occurred while accessing the camera. Please try again.");
+        setError("An unknown error occurred. Please try again.");
       }
-
     }
+    
   };
 
   const isCameraAvailable = async () => {
@@ -188,6 +192,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
       if (speakerDevices.length) setSelectedSpeaker(speakerDevices[0].deviceId);
       if (cameraDevices.length) setSelectedCamera(cameraDevices[0].deviceId);
     } catch (error) {
+      console.log(error);
       setSnackbar({
         open: true,
         message: "Failed to fetch devices. Please check your permissions.",
@@ -249,13 +254,29 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
           }})
           socket.emit("update-meeting-room", { room_code });
         }
-      } catch (error: any) {
-        const errorMessage = error.response?.data?.message || "Failed to join the room.";
-        setSnackbar({
-          open: true,
-          message: errorMessage,
-          severity: "error",
-        });
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          const errorMessage = error.response?.data?.message || "Failed to join the room.";
+          setSnackbar({
+            open: true,
+            message: errorMessage,
+            severity: "error",
+          });
+        } else if (error instanceof Error) {
+          // Handle non-Axios errors here
+          setSnackbar({
+            open: true,
+            message: error.message || "An unexpected error occurred.",
+            severity: "error",
+          });
+        } else {
+          // Handle case where the error is not an instance of Error or AxiosError
+          setSnackbar({
+            open: true,
+            message: "An unknown error occurred.",
+            severity: "error",
+          });
+        }
       }
     }
   };

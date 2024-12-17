@@ -1,5 +1,5 @@
 import Peer, { SignalData } from "simple-peer";
-
+import { Socket } from "socket.io-client";
 interface Devices {
   isMicOn: boolean;
   isCameraOn: boolean;
@@ -13,7 +13,7 @@ export default async function handlePeerConnection(
   data: Devices,
   localVideoRef: React.RefObject<HTMLVideoElement>,
   remoteVideoRefs: React.MutableRefObject<{ [key: string]: HTMLVideoElement }>,
-  socket: any,
+  socket: Socket,
   peers: { [key: string]: Peer.Instance },
   setPeers: React.Dispatch<React.SetStateAction<{ [key: string]: Peer.Instance }>>,
   room_code: string
@@ -97,8 +97,9 @@ export default async function handlePeerConnection(
         peer.on("error", (err) => console.log("Peer error:", err));
         peer.on("close", () => {
           setPeers((prevPeers) => {
-            const { [peerId]: _, ...rest } = prevPeers;
-            return rest;
+            const newPeers = { ...prevPeers };
+            delete newPeers[peerId]; 
+            return newPeers;
           });
         });
 
@@ -147,8 +148,9 @@ export default async function handlePeerConnection(
         if (peers[peerId]) {
           peers[peerId].destroy();
           setPeers((prevPeers) => {
-            const { [peerId]: _, ...rest } = prevPeers;
-            return rest;
+            const newPeers = { ...prevPeers };
+            delete newPeers[peerId]; 
+            return newPeers;
           });
         }
       });

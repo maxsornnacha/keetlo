@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem, IconButton, Typography, Divider, Snackbar, Alert } from "@mui/material";
 import { AccountCircle, Settings, Logout } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
 import axios from "axios";
+import { AxiosError } from "axios";
 
 interface User {
     id: string;
@@ -23,7 +23,6 @@ interface ProfileMenuProps {
 }
 
 export function ProfileMenu({ user }: ProfileMenuProps) {
-    const router = useRouter();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -67,11 +66,23 @@ export function ProfileMenu({ user }: ProfileMenuProps) {
                 setSnackbarSeverity("error");
                 setSnackbarOpen(true);
             }
-        } catch (error: any) {
-            setSnackbarMessage("Error logging out. Please try again.");
+        } catch (error: unknown) {
+            let errorMessage = "Error logging out. Please try again.";
+        
+            if (error instanceof AxiosError) {
+                // AxiosError has a `response` object with `data`, so you can access the error message.
+                errorMessage = error?.response?.data?.message || errorMessage;
+            } else if (error instanceof Error) {
+                // For general errors, access the `message` property.
+                errorMessage = error.message;
+            }
+        
+            // Set Snackbar state and log the error
+            setSnackbarMessage(errorMessage);
             setSnackbarSeverity("error");
             setSnackbarOpen(true);
-            console.log("Error logging out:", error.response?.data || error.message);
+        
+            console.log("Error logging out:", error instanceof AxiosError ? error?.response?.data : error instanceof Error ? error.message : error);
         }
     };
 

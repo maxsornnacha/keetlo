@@ -8,6 +8,7 @@ import { faGoogle, faFacebook, faApple } from "@fortawesome/free-brands-svg-icon
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { AxiosError } from 'axios';
 
 export default function SignIn(){
   const router = useRouter();
@@ -49,13 +50,24 @@ export default function SignIn(){
           window.location.href = "/"
         },1500);
       }
-    } catch (error: any) {
-      setSnackbar({
-        open: true,
-        message: error.response?.data?.message || "Sign-Up Failed",
-        severity: "error",
-      });
-      setError(error.response?.data?.message || "An error occurred. Please try again.");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        // Now you can safely access AxiosError properties
+        setSnackbar({
+          open: true,
+          message: error.response?.data?.message || "Sign-Up Failed",
+          severity: "error",
+        });
+        setError(error.response?.data?.message || "An error occurred. Please try again.");
+      } else {
+        // Handle the case where the error is not an AxiosError
+        setSnackbar({
+          open: true,
+          message: "An unknown error occurred.",
+          severity: "error",
+        });
+        setError("An error occurred. Please try again.");
+      }
     }
   };
 
@@ -158,7 +170,7 @@ export default function SignIn(){
 
           {/* Register Link */}
           <p className="text-sm text-center text-gray-600 mt-4">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <button
               onClick={handleRegister}
               className="text-red-500 hover:underline font-medium"
