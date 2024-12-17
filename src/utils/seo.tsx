@@ -1,5 +1,5 @@
 
-
+//SEO 
 export const seo = {
     home: {
       title: "Keetlo - Online Meeting Rooms | Secure Video Conferencing",
