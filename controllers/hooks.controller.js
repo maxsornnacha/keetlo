@@ -16,6 +16,8 @@ const usersController = {
             return res.status(401).send('Unauthorized request');
         }
 
+        console.log("check event :", req.body);
+
         //call shell script to work
         console.log('Webhook verified.');
         //Do Executing the shell script
