@@ -72,7 +72,7 @@ export default function Header() {
         <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold" }}>
           <Link href={"/"} className="flex gap-2 items-center">
             <Logo />
-            Keetlo Meeting
+            <p className="text-md lg:text-xl">Keetlo</p> <span className="hidden lg:block">Meeting</span>
           </Link>
         </Typography>
 

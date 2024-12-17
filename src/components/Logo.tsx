@@ -8,7 +8,7 @@ export function Logo() {
       height={50}
       width={50}
       alt="Keetlo logo"
-      className='py-2'
+      className='py-2 hidden md:block'
     />
     </div>
   )
