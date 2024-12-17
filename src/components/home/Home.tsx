@@ -92,31 +92,16 @@ export default function Home() {
     return (
         <div>
             {/* Hero Section */}
-            <Box
-                sx={{
-                    backgroundColor: 'black',
-                    color: 'white',
-                    padding: '50px 0',
-                    textAlign: 'center',
-                }}
-                >
-            <Container>
-                <Typography variant="h2" sx={{ fontWeight: 'bold' }}>
+            <div className="bg-black text-white py-[50px] px-8 text-center">
+            <div className="flex flex-col items-center">
+                <h1 className="text-4xl">
                 Online meeting software for all your video conferencing & webinar needs
-                </Typography>
+                </h1>
                 <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 4 }}>
                 Keetlo Meeting is a secure platform that helps you connect, collaborate, and host webinars with ease.
                 </Typography>
                 {/* Video Banner */}
-                <Box
-                    sx={{
-                        margin: '20px auto',
-                        maxWidth: '800px',
-                        height: '450px',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        borderRadius: '8px',
-                    }}
+                <div className="max-w-[800px] lg:h-[450px] overflow-hidden"
                 >
                     <video
                         width="100%"
@@ -132,19 +117,19 @@ export default function Home() {
                         <source src="/videos/home/home-video-banner.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
-                </Box>
-            </Container>
-            </Box>
+                </div>
+            </div>
+            </div>
 
-            <div className="p-28">
+            <div className="hidden lg:block p-8 lg:p-28">
             <div className="grid grid-cols-12 gap-8">
-                <div className="col-span-6">
+                <div className="col-span-12 lg:col-span-6">
                     <div className="max-w-[600px] space-y-4">
                     <h1 className="text-4xl">Trusted by enterprises around the world.</h1>
                     <p>Take advantage of the same secure-by-design infrastructure, built-in protection, and global network that Google uses to secure your information and safeguard your privacy. Meet video meetings are encrypted in transit and our array of default-on anti-abuse measures keep your meetings safe.</p>
                     </div>
                 </div>
-                <div className="col-span-6">
+                <div className="col-span-12 lg:col-span-6">
                     <Image
                     height={400}
                     width={400}
@@ -155,9 +140,28 @@ export default function Home() {
             </div>
             </div>
 
-            <div className="p-28 bg-gray-100">
-            <div className="grid grid-cols-12 gap-8">
-                <div className="col-span-6">
+            <div className="lg:hidden p-8 lg:p-28">
+            <div className="flex flex-col gap-8 items-center">
+                <div className="col-span-12 lg:col-span-6">
+                    <Image
+                    height={400}
+                    width={400}
+                    src={"https://lh3.googleusercontent.com/0prQ29KXWxm3p0ufwXYejNmgHR6Ng6wOxKZfh2VFqZxk2W1hvh7683C5hiPzkMzYnPNqhq6aUxIyp_aHgJsNtAPTSQTL_kbg0KoPyAqnJtMd7K5VqEWf=w480-rw"}
+                    alt="image-1"
+                    />
+                </div>
+                <div className="col-span-12 lg:col-span-6">
+                    <div className="max-w-[600px] space-y-4">
+                    <h1 className="text-4xl">Trusted by enterprises around the world.</h1>
+                    <p>Take advantage of the same secure-by-design infrastructure, built-in protection, and global network that Google uses to secure your information and safeguard your privacy. Meet video meetings are encrypted in transit and our array of default-on anti-abuse measures keep your meetings safe.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div className="hidden lg:block p-8 lg:p-28 bg-gray-100">
+            <div className="grid grid-cols-12 gap-8 items-center">
+                <div className="col-span-6 lg:col-span-6">
                     <Image
                     height={500}
                     width={500}
@@ -165,7 +169,26 @@ export default function Home() {
                     alt="image-1"
                     />
                 </div>
-                <div className="col-span-6">
+                <div className="col-span-6 lg:col-span-6">
+                    <div className="max-w-[600px] space-y-4">
+                    <h1 className="text-4xl">Designed to be helpful.</h1>
+                    <p>Join meetings directly from a Calendar event, an email invite, or directly from Gmail. All of the event details are right there when you need them, whether you’re joining from a computer, phone, or conference room. Helpful features like live captions, low-light mode, and noise cancellation make meetings more productive.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div className="lg:hidden p-8 lg:p-28 bg-gray-100">
+            <div className="flex flex-col gap-8 items-center">
+                <div className="col-span-12 lg:col-span-6">
+                    <Image
+                    height={500}
+                    width={500}
+                    src={"https://lh3.googleusercontent.com/7IADB3qboszfxEYMsB2SwAT1g6mjzmt_sqLp6YkTbSrioiztaeBmDZ0eC-NqZeSSH3IQHWLpXkHj9ldJxPFh3scod5PdYfb-qNfBfiDjXf4k0JIDrD0=w960-rw"}
+                    alt="image-1"
+                    />
+                </div>
+                <div className="col-span-12 lg:col-span-6">
                     <div className="max-w-[600px] space-y-4">
                     <h1 className="text-4xl">Designed to be helpful.</h1>
                     <p>Join meetings directly from a Calendar event, an email invite, or directly from Gmail. All of the event details are right there when you need them, whether you’re joining from a computer, phone, or conference room. Helpful features like live captions, low-light mode, and noise cancellation make meetings more productive.</p>
@@ -175,7 +198,7 @@ export default function Home() {
             </div>
     
           {/* Features Section */}
-          <Container style={{ padding: "50px 0" }}>
+          <Container style={{ padding: "50px 8px" }}>
             <Typography variant="h4" style={{ textAlign: "center", marginBottom: "30px" }}>
               Features
             </Typography>
@@ -222,11 +245,12 @@ export default function Home() {
             </Grid>
           </Container>
 
-          <div className="py-28">
-            <div className="grid grid-cols-2 gap-4 space-y-4 pb-28 px-28">
+          <div className="lg:py-28">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 space-y-4 pb-28 px-8 lg:px-28">
                 <h2 className="text-3xl font-bold text-center mb-6 max-w-[500px]">Unifying business communication across sectors</h2>
                 <p>Our online meeting software is flexible enough to meet growing video conferencing needs across industries. Connect, collaborate, and empower your business to stand out in your industry with our secure web meeting software.</p>
             </div>
+            <div className="hidden xl:block">
             <Swiper
             // install Swiper modules
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -249,6 +273,78 @@ export default function Home() {
                 ))}
             </Swiper>
             </div>
+            <div className="hidden lg:block xl:hidden">
+            <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={30}
+            slidesPerView={3}
+            navigation
+            autoplay
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            >
+                {cards.map((card, index) => (
+                <SwiperSlide key={index} className="h-full">
+                    <div className={`${card.color} min-h-[230px] shadow-md rounded-lg overflow-hidden h-full`}>
+                    <div className="p-16">
+                        <h3 className="font-bold text-2xl">{card.title}</h3>
+                        <p className="text-white mt-2">{card.description}</p>
+                    </div>
+                    </div>
+                </SwiperSlide>
+                ))}
+            </Swiper>
+            </div>
+
+            <div className="hidden md:block lg:hidden">
+            <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={30}
+            slidesPerView={2}
+            navigation
+            autoplay
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            >
+                {cards.map((card, index) => (
+                <SwiperSlide key={index} className="h-full">
+                    <div className={`${card.color} min-h-[230px] shadow-md rounded-lg overflow-hidden h-full`}>
+                    <div className="p-16">
+                        <h3 className="font-bold text-2xl">{card.title}</h3>
+                        <p className="text-white mt-2">{card.description}</p>
+                    </div>
+                    </div>
+                </SwiperSlide>
+                ))}
+            </Swiper>
+            </div>
+            
+            <div className="md:hidden">
+            <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation
+            autoplay
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            >
+                {cards.map((card, index) => (
+                <SwiperSlide key={index} className="h-full">
+                    <div className={`${card.color} min-h-[230px] shadow-md rounded-lg overflow-hidden h-full`}>
+                    <div className="p-16">
+                        <h3 className="font-bold text-2xl">{card.title}</h3>
+                        <p className="text-white mt-2">{card.description}</p>
+                    </div>
+                    </div>
+                </SwiperSlide>
+                ))}
+            </Swiper>
+            </div>
+            </div>
     
           {/* Testimonials Section */}
           <div style={{ backgroundColor: "#f8f9fa", padding: "50px 0" }}>
@@ -263,7 +359,7 @@ export default function Home() {
           </div>
 
           {/* FAQ */}
-          <div className="max-w-4xl mx-auto py-12">
+          <div className="max-w-4xl mx-auto py-12 px-8">
             <h2 className="text-3xl font-bold text-center mb-8">FAQs</h2>
             <div className="flex justify-end mb-4">
                 <button

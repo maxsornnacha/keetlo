@@ -298,7 +298,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 text-black">
+    <div className="flex flex-col lg:flex-row h-screen bg-gray-100 text-black">
       {/* Snackbar for notifications */}
       <Snackbar
         open={snackbar.open}
@@ -312,7 +312,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
       </Snackbar>
 
       {/* Left Panel */}
-      <div className="flex flex-col w-2/3 bg-gray-800 text-white p-8 justify-between">
+      <div className="flex flex-col lg:w-2/3 bg-gray-800 text-white  p-4 lg:p-8 justify-between">
         <div>
           <Typography variant="h6" className="mb-2">
             {user?.name}
@@ -323,7 +323,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
             ) : (
               <video
                 ref={videoRef}
-                className="w-full h-full  border border-gray-300 rounded-md"
+                className="w-full h-full  lg:border lg:border-gray-300 rounded-md"
                 autoPlay
                 playsInline
               />
@@ -355,7 +355,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
       </div>
 
       {/* Right Panel */}
-      <div className="flex flex-col w-1/3 bg-white p-8">
+      <div className="flex flex-col lg:w-1/3 bg-white p-8">
         <Typography variant="h5" className="mb-4">
           Ready to join?
         </Typography>
@@ -384,7 +384,7 @@ export default function PrejoinMeetingRoom({ room_code, handleSetAllDevicesBefor
         </button>
 
         {/* Bottom Device Selectors */}
-        <div className="mt-auto space-y-4">
+        <div className="mt-auto space-y-4 pt-8">
           <FormControl fullWidth className="mb-4">
             <InputLabel>Microphone</InputLabel>
             <Select value={selectedMic} onChange={(e) => setSelectedMic(e.target.value)} label="Microphone">

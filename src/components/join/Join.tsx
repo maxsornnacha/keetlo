@@ -96,7 +96,7 @@ export default function Join() {
   };
 
   return (
-    <div className="p-44">
+    <div className="lg:p-44 h-screen lg:h-auto">
       {/* Snackbar */}
       <Snackbar
         open={snackbarOpen}
@@ -111,7 +111,7 @@ export default function Join() {
 
       {/* Main Content */}
       <div className="container mx-auto py-12 px-6">
-        <div className="flex flex-col md:flex-row justify-between gap-8">
+        <div className="flex flex-col md:flex-row justify-between gap-16 lg:gap-8">
           {/* Left Section */}
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-4xl font-bold mb-4">
@@ -126,7 +126,7 @@ export default function Join() {
                 <input
                   type="text"
                   placeholder="Enter a code or link"
-                  className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
                   onChange={(e) => setInputValue(e.target.value)}
                 />
                 <button

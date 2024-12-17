@@ -56,7 +56,7 @@ export default function Download() {
       </Box>
 
       {/* Download Options */}
-      <Container style={{ padding: "50px 0" }}>
+      <Container style={{ padding: "50px 8px" }}>
         <Typography variant="h4" style={{ textAlign: "center", marginBottom: "30px" }}>
           Choose Your Platform
         </Typography>
@@ -87,7 +87,7 @@ export default function Download() {
       </Container>
 
       {/* System Requirements */}
-      <div className="bg-gray-100 py-16">
+      <div className="bg-gray-100 py-16 px-8">
         <Container>
           <Typography variant="h4" style={{ textAlign: "center", marginBottom: "30px" }}>
             System Requirements
@@ -136,7 +136,7 @@ export default function Download() {
       </div>
 
       {/* Installation Guide */}
-      <Container style={{ padding: "50px 0" }}>
+      <Container style={{ padding: "50px 16px" }}>
         <Typography variant="h4" style={{ textAlign: "center", marginBottom: "30px" }}>
           Quick Installation Guide
         </Typography>

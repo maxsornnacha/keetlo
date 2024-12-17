@@ -94,7 +94,7 @@ export default function SignIn(){
     <>
     <div className="flex min-h-screen bg-gray-100">
       {/* Left Section */}
-      <div className="flex-1 flex justify-center items-center">
+      <div className="hidden lg:flex flex-1 justify-center items-center">
         <Image
           src="/images/sign-in/signin-image.png"
           alt="Illustration"

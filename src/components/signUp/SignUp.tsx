@@ -107,7 +107,7 @@ export default function SignUp() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Left Section */}
-      <div className="flex-1 flex justify-center items-center">
+      <div className="hidden lg:flex flex-1 justify-center items-center">
         <div>
           <img
             src="/images/sign-up/signup-image.png"
@@ -118,7 +118,7 @@ export default function SignUp() {
       </div>
 
       {/* Right Section */}
-      <div className="flex-1 flex flex-col justify-center bg-white p-10">
+      <div className="flex-1 flex flex-col lg:justify-center bg-white pt-20 lg:pt-0 p-10">
         <div className="max-w-sm mx-auto">
           <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
 

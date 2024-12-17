@@ -32,7 +32,6 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Checks if the screen width is smaller than the "sm" breakpoint
 
   const { loggedIn, user, loading } = useSelector((state: RootState) => state.auth);
 
@@ -80,8 +79,7 @@ export default function Header() {
           </Link>
         </Typography>
 
-        {!isMobile ? (
-          // Desktop Navigation
+        <div className="hidden lg:block">
           <Box className="flex gap-4 items-center">
             {navigationLinks.map((link) => (
               <Link key={link.label} href={link.href}>
@@ -118,9 +116,10 @@ export default function Header() {
               </button>
             </Link>
           </Box>
-        ) : (
-          // Mobile Navigation
-          <>
+        </div>
+
+        <div className="lg:hidden flex">
+            <div className="me-2">
             <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
@@ -146,22 +145,27 @@ export default function Header() {
                 </List>
               </Box>
             </Drawer>
-          </>
-        )}
+            </div>
+            <Link href={"/join"}>
+              <button className="me-2 bg-red-500 hover:bg-red-700 px-6 py-2 rounded-md text-white">
+                Join
+              </button>
+            </Link>
+          </div>
+
 
         {!loading && (
           loggedIn ? (
-            <Box className="ms-4">
+            <Box className="lg:ms-2">
               <ProfileMenu user={user} />
             </Box>
           ) : (
-            <Button
-              onClick={() => router.push("/sign-in")}
-              sx={{ marginLeft: 2 }}
-              className="text-red-500"
+            <button
+            className="lg:ms-2 hover:text-red-500" 
+            onClick={() => router.push("/sign-in")}
             >
               Sign In
-            </Button>
+            </button>
           )
         )}
       </Toolbar>

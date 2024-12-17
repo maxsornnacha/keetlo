@@ -18,18 +18,19 @@ export function ProfileNavigation() {
   return (
     <nav className="flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1 flex-wrap">
       {navItems.map((item) => (
+        <div key={item.href} className="hover:text-red-500">
         <Link
-          key={item.href}
           href={item.href}
           className={cn(
             "inline-flex items-center rounded-md px-3 py-2 text-sm font-medium",
             pathname === item.href
-              ? "bg-muted text-foreground"
+              ? "text-red-500 underline underline-offset-4"
               : "text-muted-foreground hover:bg-muted hover:text-foreground"
           )}
         >
           {item.name}
         </Link>
+        </div>
       ))}
     </nav>
   )
