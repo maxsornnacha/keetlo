@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { Typography, Container, Grid, Card, CardContent, Box } from "@mui/material";
+import { Typography, Container, Grid, Card, CardContent } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 // Import Swiper styles

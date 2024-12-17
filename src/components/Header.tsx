@@ -11,13 +11,11 @@ import {
   Menu,
   MenuItem,
   IconButton,
-  useMediaQuery,
   Drawer,
   List,
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -31,7 +29,6 @@ import { ProfileMenu } from "./profile/ProfileMenu";
 export default function Header() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const theme = useTheme();
 
   const { loggedIn, user, loading } = useSelector((state: RootState) => state.auth);
 
