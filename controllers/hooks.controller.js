@@ -8,7 +8,8 @@ const usersController = {
             .createHmac('sha256', GITHUB_SECRET)
             .update(JSON.stringify(req.body))
             .digest('hex')}`;
-              
+        
+        //Pretect accessing from the outside (only accessible for githook and linked to this api)
         const isValid = req.headers['x-hub-signature-256'] === signature;
         
         if (!isValid) {
