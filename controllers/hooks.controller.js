@@ -15,13 +15,35 @@ const usersController = {
             console.log('Unauthorized request')
             return res.status(401).send('Unauthorized request');
         }
-
-        console.log("check event:", req.body);
-
-        //call shell script to work
+         //call shell script to work
         console.log('Webhook verified.');
+
+         // Extract branch name from the payload
+        const ref = req.body.ref; // Example: 'refs/heads/main'
+        const branch = ref?.split('/').pop(); // Extracts the branch name
+        console.log(`Branch pushed: ${branch}`);
+
+        // Define shell scripts for each branch
+        let scriptPath = '';
+
+        switch (branch) {
+        case 'main':
+            scriptPath = '/mnt/xvdd/keetlo/api/shell/client.sh';
+            break;
+        case 'api':
+            scriptPath = '/mnt/xvdd/keetlo/api/shell/api.sh';
+            break;
+        case 'socket':
+            scriptPath = '/mnt/xvdd/keetlo/api/shell/socket.sh';
+            break;
+        default:
+            console.log(`No script defined for branch: ${branch}`);
+            return res.status(400).send(`No script defined for branch: ${branch}`);
+        }
+        
         //Do Executing the shell script
-        exec('sh /mnt/xvdd/keetlo/api/shell/deploy.sh', (error, stdout, stderr) => {
+        console.log(`Executing script for branch: ${branch}, running on script path : ${scriptPath}`);
+        exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`Error executing script: ${error.message}`);
                 return res.status(500).send('Script execution failed');
@@ -35,7 +57,6 @@ const usersController = {
             res.status(200).send('Webhook received and script executed');
         });
     }
-    //Test auto hook again
 
 }
 
