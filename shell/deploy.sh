@@ -13,6 +13,7 @@ pm2 delete keetlo-client
 cd /mnt/xvdd/keetlo/client
 git pull origin main
 npm run build
+pm2 start npm --name "keetlo-client" -- run start
 echo "Deploy script completed on keetlo client"
 
 # API deploying
@@ -24,5 +25,4 @@ echo "Deploy script completed on keetlo api"
 
 # RUN pm2 again
 pm2 restart keetlo-socket
-pm2 start npm --name "keetlo-client" -- run start
 pm2 restart keetlo-api
