@@ -25,6 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link
+        rel="icon"
+        href="/images/logo/keetlo-logo.png"
+        sizes="any"
+      />
+      <link 
+        rel="apple-touch-icon" 
+        sizes="any" 
+        href="/images/logo/keetlo-logo.png" 
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

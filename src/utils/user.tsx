@@ -25,9 +25,9 @@ export const fetchLoginStatus = async (): Promise<{ loggedIn: boolean; user?: Us
     return { loggedIn: false };
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.error("Error fetching login status:", error.response?.data || error.message);
+      console.log("Error fetching login status:", error.response?.data || error.message);
     } else {
-      console.error("Unexpected error:", error);
+      console.log("Unexpected error:", error);
     }
     return { loggedIn: false };
   }

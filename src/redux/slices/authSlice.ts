@@ -36,9 +36,9 @@ export const fetchUserLoginStatus = createAsyncThunk<
     return { loggedIn: false, user: null };
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.error("Axios error:", error.message);
+      console.log("Axios error:", error.message);
     } else {
-      console.error("Unexpected error:", error);
+      console.log("Unexpected error:", error);
     }
     return thunkAPI.rejectWithValue({ loggedIn: false });
   }
