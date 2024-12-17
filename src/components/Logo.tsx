@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export function Logo(props: {className?: string}) {
+export function Logo() {
   return (
     <Image
       src={"/images/logo/keetlo-logo-header.png"}
